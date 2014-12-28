@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GokcagApp</string>
+    <string name="title_menu_detail">Menu Detail</string>
+    
+    <string name="SW_SUCCESS_RESPONSE">9000</string>
+    <string name="SW_EMPTY_RESPONSE">6A88</string>
+    <string name="SW_FAILED_RESPONSE">6985</string>
+    <string name="SW_NOT_FOUND">6900</string>
+    <string name="SW_ALREADY_USED">6901</string>
+    <string name="SW_BALANCE_NOT_ENOUGH">6A00</string>
+    <string name="SW_EXCEPTION_RESPONSE">6F00</string>
+    
+    <string name="PREFERENCE_FILE_KEY">com.example.gokcagapp.Preference</string>
+    <string name="SUPPORTED_APPLICATION_MODE">00000001</string>
+    <string name="Set">Set</string>
+    <string name="Update">Update</string>
+    <string name="Refresh">Refresh</string> 
+    
+    <string name="CARD_HOLDER_NAME">CARD_HOLDER_NAME</string>
+    <string name="BALANCE_CUTA">BALANCE_CUTA</string>
+    <string name="BALANCE_CTTA">BALANCE_CTTA</string>
+    <string name="PHONE_NUMBER">PHONE_NUMBER</string>
+    <string name="USABLE_PLAIN_TICKETS">USABLE_PLAIN_TICKETS</string>
+    <string name="USED_PLAIN_TICKETS">USED_PLAIN_TICKETS</string>
+
+</resources>

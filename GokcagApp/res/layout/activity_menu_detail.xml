@@ -1,0 +1,156 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_detail_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    tools:context=".MenuListActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/CARD_HOLDER_NAME"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtBalanceCUTA"
+        android:layout_alignBottom="@+id/txtBalanceCUTA"
+        android:layout_alignLeft="@+id/TextView03"
+        android:text="@string/BALANCE_CUTA"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtBalanceCTTA"
+        android:layout_alignBottom="@+id/txtBalanceCTTA"
+        android:layout_alignRight="@+id/TextView04"
+        android:text="@string/BALANCE_CTTA"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txtBalanceCTTA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtBalanceCUTA"
+        android:layout_below="@+id/txtBalanceCUTA"
+        android:ems="10"
+        android:labelFor="@+id/txtBalanceCTTA"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtPhoneNumber"
+        android:layout_alignBottom="@+id/txtPhoneNumber"
+        android:layout_alignLeft="@+id/TextView02"
+        android:text="@string/PHONE_NUMBER"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtUsablePainTickets"
+        android:layout_alignBottom="@+id/txtUsablePainTickets"
+        android:layout_alignLeft="@+id/TextView05"
+        android:text="@string/USABLE_PLAIN_TICKETS"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtUsedPlainTickets"
+        android:layout_alignBottom="@+id/txtUsedPlainTickets"
+        android:layout_alignRight="@+id/textView1"
+        android:text="@string/USED_PLAIN_TICKETS"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txtBalanceCUTA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtUsedPlainTickets"
+        android:layout_marginLeft="48dp"
+        android:layout_toRightOf="@+id/TextView02"
+        android:ems="10"
+        android:labelFor="@+id/txtBalanceCUTA"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/txtCardHolderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/txtBalanceCUTA"
+        android:ems="10"
+        android:labelFor="@+id/txtCardHolderName"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtCardHolderName"
+        android:layout_below="@+id/txtCardHolderName"
+        android:ems="10"
+        android:labelFor="@+id/txtPhoneNumber"
+        android:inputType="phone" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtUsablePainTickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtPhoneNumber"
+        android:layout_below="@+id/txtPhoneNumber"
+        android:ems="10"
+        android:labelFor="@+id/txtUsablePainTickets"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/txtUsedPlainTickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtBalanceCUTA"
+        android:layout_below="@+id/txtUsablePainTickets"
+        android:ems="10"
+        android:labelFor="@+id/txtUsedPlainTickets"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txtBalanceCTTA"
+        android:layout_below="@+id/txtBalanceCTTA"
+        android:layout_marginTop="18dp"
+        android:text="@string/Refresh" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnRefresh"
+        android:layout_alignBottom="@+id/btnRefresh"
+        android:layout_marginRight="32dp"
+        android:layout_toLeftOf="@+id/btnRefresh"
+        android:text="@string/Update" />
+
+</RelativeLayout>
+
