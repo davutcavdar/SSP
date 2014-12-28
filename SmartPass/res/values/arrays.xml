@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    
+
+    
+    
+<string-array name = "snipper">
+
+<item>1 day</item>
+<item>1 week</item>
+<item>1 month</item>
+<item>1 year</item>
+
+</string-array>    
+    
+   
+   
+<string-array name = "expiretime">
+
+<item>1</item>
+<item>7</item>
+<item>31</item>
+<item>365</item>
+
+</string-array> 
+
+
+    
+    
+</resources>

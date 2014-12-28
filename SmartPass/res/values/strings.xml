@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smartpass</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="gonder">gonder</string>
+    <string name="action_settings">Settings</string>
+    <string name="activity_into">Reader mode active</string>
+    <string name="aiddescription">aiddescription</string>
+   
+    
+
+</resources>
