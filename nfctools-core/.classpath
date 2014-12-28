@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/nfctools-api"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/nfctools-ndef"/>
-	<classpathentry kind="lib" path="C:/Android/workspace/nfctools-p2pp/libs/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="libs/slf4j-api-1.7.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
