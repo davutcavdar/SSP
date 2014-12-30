@@ -7,10 +7,10 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/nfctools-core"/>
 	<classpathentry kind="lib" path="libs/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="/nfctools-core/libs/slf4j-api-1.7.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/httpclient-cache-4.3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/httpcore-4.3.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/httpclient-4.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/libs/httpclient-cache-4.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/libs/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/libs/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/libs/httpclient-4.3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/SmartPass/libs/nfctools-examples.jar"/>
+	<classpathentry kind="lib" path="C:/libs/nfctools-examples.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Davut/git/SSP/nfctools-p2pp/libs/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="C:/libs/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/libs/RXTXcomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
