@@ -24,6 +24,8 @@ public class GcHostApduService extends HostApduService {
 		aUsedTickets = null;
 	}
 	
+	
+	
 	@Override
 	public void onDeactivated(int reason) {
 
