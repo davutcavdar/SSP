@@ -13,9 +13,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -36,14 +34,14 @@
         <activity android:name=".Login" />
         
         <activity android:name=".Request" />
-        <activity android:name=".MainActivity1">
+        <activity android:name=".MainActivity1" />
+        <activity android:name=".Relay" >
             
             <element>
             	<intent-filter>
-            		<action
-            			android:name="android.nfc.action.NDEF_DISCOVERED" />
-            		<category
-            			android:name="android.intent.category.DEFAULT" />
+            		<action android:name="android.nfc.action.NDEF_DISCOVERED" />
+            		<category android:name="android.intent.category.DEFAULT" />
+            		<data android:mimeType="application/com.ssp.android.NfcP2PActivity" />
             	</intent-filter>
             </element>
         </activity>

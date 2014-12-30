@@ -1,4 +1,6 @@
-package com.motes.controlpanel;
+package com.ssp.relayapp;
+
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,18 +9,40 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.com.motes.controlpanel.R;
+
 
 public class MainActivity extends Activity {
 
 	private TextView textView;
+	private Button fwcard;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		final Intent regfw = new Intent(this, MainActivity1.class);	
+	fwcard = (Button) findViewById(R.id.fwcard)	;
+		
+	fwcard.setOnClickListener(new OnClickListener() {
+
+		public void onClick(View arg0) {
+
+			startActivity(regfw);
+
+		}
+	});
+		
+		
+		
+		
 	}
 
 	@Override

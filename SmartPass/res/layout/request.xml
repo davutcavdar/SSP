@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="69dp"
-        android:text="Kapiya Yaklasip Ekrana Dokununuz"
+        android:text="Please get close to reader"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageButton
@@ -22,5 +22,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
         android:src="@drawable/key" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView1"
+        android:text="Relay" />
 
 </RelativeLayout>

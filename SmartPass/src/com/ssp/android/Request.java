@@ -3,11 +3,13 @@ package com.ssp.android;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -22,9 +24,7 @@ public class Request extends Activity {
 	String reqresult=null;
 	private ImageButton SentReq;
 	private String key;
-
-	
-
+	private Button Relaybtn;
 	public final static String KEY = "key";
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,9 @@ public class Request extends Activity {
 //
 //		mAdapter.setOnNdefPushCompleteCallback(this, this);
 
-
+		
+		final Intent relayfw = new Intent(this, Relay.class);
+		
 		Intent i = getIntent();
 		if (i.getExtras().containsKey(KEY)) {
 			key = (String)i.getExtras().get(KEY);
@@ -47,7 +49,28 @@ public class Request extends Activity {
 		}
 		
 		MyHostApduService.carddata= key;
+		Relay.relaydata=key;
 		SentReq = (ImageButton) findViewById(R.id.imageButton1);
+		Relaybtn= (Button) findViewById(R.id.button1);
+		
+		
+		
+		Relaybtn.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			
+				startActivity(relayfw);
+				
+				
+			}	
+		});
+		
+		
+		
+		
+		
 
 		SentReq.setOnClickListener(new OnClickListener() {
 
@@ -59,6 +82,10 @@ public class Request extends Activity {
 
 			}
 		});
+	
+	
+	
+	
 	}
 
 	public static String convertStreamToString(InputStream is) throws Exception {
