@@ -176,13 +176,14 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 				e.printStackTrace();
 			}
 
-		
+			data[0] = '0'; // arduino ya sürekli akým vermesin diye
+			sc.writetoport(data);
 
 		}
 		else {
+			
 			byte[] data = new byte[1];
 			data[0] = '0';
-			
 			sc.writetoport(data);
 			System.out.println("Sonuc : Yetkiniz yok");
 

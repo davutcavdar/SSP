@@ -35,8 +35,14 @@ public class MainActivity extends Activity {
 
 		public void onClick(View arg0) {
 
+			
+			textView = (TextView) findViewById(R.id.textView);	
+			
+			MainActivity1.key=textView.getText().toString();
+			
 			startActivity(regfw);
-
+			
+	
 		}
 	});
 		

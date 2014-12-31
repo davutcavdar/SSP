@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 
 import android.app.Activity;
 import android.app.Service;
+import android.graphics.Color;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -26,6 +27,7 @@ public class Relay extends Activity implements CreateNdefMessageCallback, OnNdef
 	private NfcAdapter mAdapter;
 	public EditText dataEditText;
 	public TextView datatext;
+	public TextView info;
 	public static String relaydata="data";
 	
 	/** Called when the activity is first created. */
@@ -46,11 +48,13 @@ public class Relay extends Activity implements CreateNdefMessageCallback, OnNdef
         dataEditText = (EditText) findViewById(R.id.dataEditText);
         
         datatext = (TextView) findViewById(R.id.datatext);
+        info = (TextView) findViewById(R.id.info);
         
         
-        
-        dataEditText.setText("Used Key :");
+        dataEditText.setText("User Key :");
         datatext.setText(relaydata);
+        info.setTextColor(Color.parseColor("#FF0000"));
+        
     }
     
     

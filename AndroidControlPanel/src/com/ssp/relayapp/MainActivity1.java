@@ -2,9 +2,11 @@ package com.ssp.relayapp;
 
 
 
+
 import com.ssp.relayapp.IsoDepTransceiver.OnMessageReceived;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcAdapter.ReaderCallback;
 import android.nfc.Tag;
@@ -13,7 +15,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.TextView;
+
 
 
 public class MainActivity1 extends Activity implements OnMessageReceived, ReaderCallback {
@@ -22,7 +26,9 @@ public class MainActivity1 extends Activity implements OnMessageReceived, Reader
 	//private ListView listView;
 	private IsoDepAdapter isoDepAdapter;
 	private Button chdata;
-	//	private EditText Txt;
+	private EditText Txt;
+	private TextView info;
+	public static String key="davut" ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +41,9 @@ public class MainActivity1 extends Activity implements OnMessageReceived, Reader
 
 
 		chdata = (Button) findViewById(R.id.button1);
-		//	Txt= (EditText) findViewById(R.id.editText1);
-
-
+		Txt= (EditText) findViewById(R.id.editText1);
+		info= (TextView) findViewById(R.id.info);
+		Txt.setText(key);
 
 
 
@@ -49,10 +55,15 @@ public class MainActivity1 extends Activity implements OnMessageReceived, Reader
 
 				try {
 
+					
+					
+					MyHostApduService.carddata= key;
+					
+					info.setText("Relay Card is ready!!");
+					 info.setTextColor(Color.parseColor("#FF0000"));
+					
 					//		String CardData = null;
-
 					//	CardData = Txt.getText().toString();
-
 					//	MyHostApduService.carddata= CardData;
 
 

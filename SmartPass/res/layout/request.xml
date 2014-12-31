@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView1"
-        android:text="Relay" />
+        android:text="Relay Mode" />
 
 </RelativeLayout>

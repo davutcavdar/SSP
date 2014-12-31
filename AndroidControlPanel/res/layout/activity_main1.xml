@@ -31,4 +31,13 @@
         android:layout_marginTop="30dp"
         android:text="Apply Key" />
 
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_centerVertical="true"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>

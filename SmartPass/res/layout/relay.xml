@@ -10,6 +10,18 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:text="@string/hello" />
+    
+    
+    
+    
+    
+         <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="" />
+    
 
     <TextView
         android:id="@+id/datatext"
@@ -17,5 +29,21 @@
         android:layout_height="wrap_content"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    
+        <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="" />
+    
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Touch to Relay Phone" />
 
 </LinearLayout>
