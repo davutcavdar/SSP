@@ -63,14 +63,14 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 			InListPassiveTargetResp inListPassiveTargetResp = sendMessage(new InListPassiveTargetReq((byte)1, (byte)0,
 					new byte[0]));
 			if (inListPassiveTargetResp.getNumberOfTargets() > 0) {
-				log.info("TargetData: " + NfcUtils.convertBinToASCII(inListPassiveTargetResp.getTargetData()));
+				// log.info("TargetData: " + NfcUtils.convertBinToASCII(inListPassiveTargetResp.getTargetData()));
 				if (inListPassiveTargetResp.isIsoDepSupported()) {
-					log.info("IsoDep Supported");
+			//		log.info("IsoDep Supported");
 					byte[] selectAidApdu = createSelectAidApdu(AID_ANDROID);
 					DataExchangeResp resp = sendMessage(new DataExchangeReq(inListPassiveTargetResp.getTargetId(),
 							false, selectAidApdu, 0, selectAidApdu.length));
 					String dataIn = new String(resp.getDataOut());
-					log.info("Received: " + dataIn);
+				//	log.info("Received: " + dataIn);
 				
 				
 				//sendreq=dataIn;
@@ -107,7 +107,7 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 		
 		
 		
-		System.out.println("sorgulanan key sendreq: " + key);
+		System.out.println("Requested Key: " + key);
 		
 	
 		
@@ -155,12 +155,12 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 		JsonObject rootobj = root.getAsJsonObject(); //may be an array, may be an object. 
 		String response = rootobj.get("response").getAsString();
 
-		System.out.println("key: "+ key);
+		System.out.println("Response key: "+ key);
 		
-		System.out.println("Sonuc Kod : " +response);
+		System.out.println("Result : " +response);
 		
 	
-		sc = new SerialCommunicator();
+		 sc = new SerialCommunicator();
 
 
 		if (response.equals("1")) {
@@ -168,7 +168,7 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 			data[0] = '1';
 			
 			sc.writetoport(data);
-			System.out.println("Sonuc :Kapý acýlýyor");
+			System.out.println("Result :Access Granted! Door is opening");
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
@@ -177,7 +177,7 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 			}
 
 			data[0] = '0'; // arduino ya sürekli akým vermesin diye
-			sc.writetoport(data);
+			//sc.writetoport(data);
 
 		}
 		else {
@@ -185,7 +185,7 @@ public class IsoDepTamaCommunicator extends AbstractTamaCommunicator {
 			byte[] data = new byte[1];
 			data[0] = '0';
 			sc.writetoport(data);
-			System.out.println("Sonuc : Yetkiniz yok");
+			System.out.println("Result : No Access");
 
 		}
 		
