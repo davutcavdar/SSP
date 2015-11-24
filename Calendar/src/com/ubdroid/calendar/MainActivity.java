@@ -1,16 +1,50 @@
 package com.ubdroid.calendar;
 
+
+
 import android.app.Activity;
+import android.app.Service;
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 
 public class MainActivity extends Activity {
+	
+	
+	public TextView datatext;
+	private int volume_level=0;
 
-	@Override
+	
+
+
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		datatext = (TextView) findViewById(R.id.VolumeTxt);
+		
+		
+		
+		AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE); 
+		volume_level= am.getRingerMode();
+		
+		
+		if (volume_level==0)
+		{
+			datatext.setText("Telefonun modu sessiz"); }
+			
+			if (volume_level==2){
+				datatext.setText("Telefonun modu sesli");}
+				
+			if (volume_level==1){
+				datatext.setText("Telefonun modu titresim");}
+		
+		
 	}
 
 	@Override
