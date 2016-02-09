@@ -27,6 +27,7 @@ import java.util.List;
 
 public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
+	//David
     private Spinner mailChooser;
     private ListView eventList;
     private Account[] accounts;
