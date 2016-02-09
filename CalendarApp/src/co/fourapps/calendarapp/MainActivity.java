@@ -39,8 +39,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             CalendarContract.Events._ID,                           // 0
             CalendarContract.Events.DTSTART,                  // 1
             CalendarContract.Events.DTEND,         // 2
-            CalendarContract.Events.OWNER_ACCOUNT,                  // 3
-            CalendarContract.Events.TITLE // 4
+            CalendarContract.Events.OWNER_ACCOUNT,                  // 3        
+            CalendarContract.Events.TITLE, // 4
+            CalendarContract.Events.ACCESS_LEVEL 
+            
     };
 
     @Override
@@ -153,7 +155,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
         while (cur.moveToNext()) {
             long calID = 0;
-            String title,owner,strDate,endDate;
+            String title,owner,strDate,endDate,access;
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -168,8 +170,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             strDate = formatter.format(calendar.getTime());
             calendar.setTimeInMillis(Long.parseLong(cur.getString(2)));
             endDate = formatter.format(calendar.getTime());
+            access= cur.getString(5);
 
-            events.add(new CalendarEvent(title,owner,strDate,endDate));
+            events.add(new CalendarEvent(title,owner,strDate,endDate,access));
 
         }
 

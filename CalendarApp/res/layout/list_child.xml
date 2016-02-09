@@ -33,6 +33,13 @@
             android:layout_weight="1"
             android:text="New Text"
             android:id="@+id/endDate" />
+        
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="New Text"
+            android:id="@+id/access" />
     </LinearLayout>
 
 

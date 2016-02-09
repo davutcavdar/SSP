@@ -30,18 +30,21 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
         UiElements.organizer = (TextView) rowView.findViewById(R.id.organizer);
         UiElements.start = (TextView) rowView.findViewById(R.id.startDate);
         UiElements.end = (TextView) rowView.findViewById(R.id.endDate);
+        UiElements.access= (TextView) rowView.findViewById(R.id.access);
 
 
         UiElements.title.setText(values[position].getEventName());
         UiElements.organizer.setText(values[position].getOrganizerName());
         UiElements.start.setText(values[position].getStartDate());
         UiElements.end.setText(values[position].getEndDate());
+        UiElements.access.setText(values[position].getAccess());
 
 
         return rowView;
     }
 
     static final class UiElements {
-        public static TextView title,organizer,start,end;
+        public static TextView access;
+		public static TextView title,organizer,start,end;
     }
 }

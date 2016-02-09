@@ -3,13 +3,14 @@ package co.fourapps.calendarapp;
 
 public class CalendarEvent {
 
-    private String eventName,organizerName,startDate,endDate;
+    private String eventName,organizerName,startDate,endDate,access;
 
-    public CalendarEvent(String eventName, String organizerName, String startDate, String endDate) {
+    public CalendarEvent(String eventName, String organizerName, String startDate, String endDate, String access) {
         this.eventName = eventName;
         this.organizerName = organizerName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.access = access;
     }
 
     public String getEventName() {
@@ -43,4 +44,16 @@ public class CalendarEvent {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+    
+    
+    public String getAccess() {
+        return access;
+    }
+
+    public void setAccess(String access) {
+        this.access = access;
+    }
+    
+    
+    
 }
