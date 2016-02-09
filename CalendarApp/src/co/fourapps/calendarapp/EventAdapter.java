@@ -12,6 +12,7 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
 
     private Context context;
     private CalendarEvent[] values;
+    
 
     public EventAdapter(Context context, int resource, CalendarEvent[] objects) {
         super(context, resource, objects);
@@ -30,21 +31,25 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
         UiElements.organizer = (TextView) rowView.findViewById(R.id.organizer);
         UiElements.start = (TextView) rowView.findViewById(R.id.startDate);
         UiElements.end = (TextView) rowView.findViewById(R.id.endDate);
-        UiElements.access= (TextView) rowView.findViewById(R.id.access);
+        UiElements.eventaccess= (TextView) rowView.findViewById(R.id.eventaccess);
+        UiElements.calendarname= (TextView) rowView.findViewById(R.id.calendarname);
+        UiElements.calendaraccess= (TextView) rowView.findViewById(R.id.calendaraccess);
+      
+        
 
-
-        UiElements.title.setText(values[position].getEventName());
-        UiElements.organizer.setText(values[position].getOrganizerName());
+        UiElements.title.setText("Event Title: " + values[position].getEventName());
+        UiElements.organizer.setText("Event Owner: "+values[position].getOrganizerName());
         UiElements.start.setText(values[position].getStartDate());
         UiElements.end.setText(values[position].getEndDate());
-        UiElements.access.setText(values[position].getAccess());
-
-
+        UiElements.eventaccess.setText("Event Privacy: "+values[position].getAccess());
+        UiElements.calendarname.setText("Calendar: "+values[position].getCalendarName());
+        UiElements.calendaraccess.setText("Calendar Privacy: "+values[position].getCalendarAccess());
+       
         return rowView;
     }
 
     static final class UiElements {
-        public static TextView access;
-		public static TextView title,organizer,start,end;
+  
+		public static TextView title,organizer,start,end,eventaccess,calendarname,calendaraccess,volumelevel;
     }
 }

@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -24,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+
 
 public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
@@ -34,6 +38,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private Account selectedAccount;
     private EventAdapter adapter;
     private List<CalendarEvent> events;
+	public TextView datatext;
+	private int volume_level=0;
+ 
 
     public static final String[] EVENT_PROJECTION = new String[]{
             CalendarContract.Events._ID,                           // 0
@@ -41,7 +48,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             CalendarContract.Events.DTEND,         // 2
             CalendarContract.Events.OWNER_ACCOUNT,                  // 3        
             CalendarContract.Events.TITLE, // 4
-            CalendarContract.Events.ACCESS_LEVEL 
+            CalendarContract.Events.ACCESS_LEVEL, //5
+            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,//6
+            CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL //7
             
     };
 
@@ -50,12 +59,34 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        
         mailChooser = (Spinner) findViewById(R.id.spinner);
         eventList = (ListView) findViewById(R.id.listView);
+        datatext = (TextView) findViewById(R.id.VolumeTxt);
 
         events = new ArrayList<CalendarEvent>();
 
 
+		AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE); 
+		volume_level= am.getRingerMode();
+		
+		
+		if (volume_level==0)
+		{
+			datatext.setText("Telefonun ses seviyesi: sessiz"); }
+			
+			if (volume_level==2){
+				datatext.setText("Telefonun ses seviyesi: sesli");}
+				
+			if (volume_level==1){
+				datatext.setText("Telefonun ses seviyesi: titresim");}
+		
+		
+	
+        
+        
+        
         try {
             accounts = AccountManager.get(this).getAccountsByType("com.google");
             selectedAccount = accounts[0];
@@ -95,7 +126,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     }
 
-    public void makeQuery() {
+    @SuppressWarnings("deprecation")
+	public void makeQuery() {
         Date sDate = new Date();
         Date eDate = new Date();
  
@@ -104,7 +136,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         sDate.setSeconds(0);
         
 
-        
         eDate.setDate(sDate.getDate()+1);
         eDate.setHours(2);
         eDate.setMinutes(0);
@@ -127,17 +158,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         String todayAsString = dateFormat.format(eDate);
-        String tomorrowAsString = dateFormat.format(tomorrow);
+ 
         
-      
-        int duration = Toast.LENGTH_SHORT;
-        
-        Toast.makeText(context, (CharSequence) todayAsString, duration).show();
 
+    
+        Toast.makeText(context, "Reading Events" +(CharSequence) todayAsString, Toast.LENGTH_SHORT).show();
+
+        
         Cursor cur = null;
         ContentResolver cr = getContentResolver();
         Uri uri = CalendarContract.Events.CONTENT_URI;
-        //String selection = "((" + CalendarContract.Events.ACCOUNT_NAME + " = ?))";
+        
         String selection = "((" + CalendarContract.Events.ACCOUNT_NAME + " = ?) AND ("
                 + CalendarContract.Events.DTSTART + " >= ?) AND ("+ CalendarContract.Events.DTEND + " <= ?))";
      
@@ -155,7 +186,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
         while (cur.moveToNext()) {
             long calID = 0;
-            String title,owner,strDate,endDate,access;
+            String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -170,12 +201,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             strDate = formatter.format(calendar.getTime());
             calendar.setTimeInMillis(Long.parseLong(cur.getString(2)));
             endDate = formatter.format(calendar.getTime());
-            access= cur.getString(5);
+            eventaccess= cur.getString(5);
+            calendarname=cur.getString(6);
+            calendaraccess=cur.getString(7);
 
-            events.add(new CalendarEvent(title,owner,strDate,endDate,access));
+            events.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
 
+            
+           
         }
-
+        
+;
         adapter = new EventAdapter(this, -1, events.toArray(new CalendarEvent[events.size()]));
         eventList.setAdapter(adapter);
     }

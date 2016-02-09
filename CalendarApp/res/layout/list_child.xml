@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
 
+   
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,8 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/organizer"
-        android:layout_below="@+id/title"/>
+        android:id="@+id/organizer"/>
+     
+    
+        <TextView
+         	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/calendarname" />
+            
+            <TextView
+         	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/calendaraccess" /> 
+       
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="New Text"
-            android:id="@+id/access" />
+            android:id="@+id/eventaccess" />
+        
+    
+        
     </LinearLayout>
 
 
