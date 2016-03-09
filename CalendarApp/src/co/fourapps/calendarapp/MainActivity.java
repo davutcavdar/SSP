@@ -34,10 +34,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 	//David
     private Spinner mailChooser;
     private ListView eventList;
+    private ListView insList;
     private Account[] accounts;
     private Account selectedAccount;
     private EventAdapter adapter;
+    private EventAdapter adapter_ins;
     private List<CalendarEvent> events;
+    private List<CalendarEvent> ins;
 	public TextView datatext;
 	private int volume_level=0;
  
@@ -50,7 +53,21 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             CalendarContract.Events.TITLE, // 4
             CalendarContract.Events.ACCESS_LEVEL, //5
             CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,//6
-            CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL //7
+            CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, //7
+          
+            
+    };
+    
+    public static final String[] EVENT_PROJECTION_INS = new String[]{
+            CalendarContract.Events._ID,                           // 0
+            CalendarContract.Events.DTSTART,                  // 1
+            CalendarContract.Events.DTEND,         // 2
+            CalendarContract.Events.OWNER_ACCOUNT,                  // 3        
+            CalendarContract.Events.TITLE, // 4
+            CalendarContract.Events.ACCESS_LEVEL, //5
+            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,//6
+            CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, //7
+            CalendarContract.Instances.BEGIN //8
             
     };
 
@@ -63,6 +80,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         
         mailChooser = (Spinner) findViewById(R.id.spinner);
         eventList = (ListView) findViewById(R.id.listView);
+        insList = (ListView) findViewById(R.id.insView);
         datatext = (TextView) findViewById(R.id.VolumeTxt);
 
         events = new ArrayList<CalendarEvent>();
@@ -166,8 +184,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
         
         Cursor cur = null;
+        Cursor cur2=null; //for instances
+        
         ContentResolver cr = getContentResolver();
+        ContentResolver cr2 = getContentResolver(); //for instances
+        
         Uri uri = CalendarContract.Events.CONTENT_URI;
+        Uri uri2 = CalendarContract.Instances.CONTENT_URI; // for instances
         
         String selection = "((" + CalendarContract.Events.ACCOUNT_NAME + " = ?) AND ("
                 + CalendarContract.Events.DTSTART + " >= ?) AND ("+ CalendarContract.Events.DTEND + " <= ?))";
@@ -183,7 +206,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
        
         
         cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
+        cur2 = cr2.query(uri2, EVENT_PROJECTION_INS, selection, selectionArgs, null);
 
+        
         while (cur.moveToNext()) {
             long calID = 0;
             String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
@@ -207,15 +232,60 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
             events.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
 
-            
            
-        }
-        
-;
+        };
         adapter = new EventAdapter(this, -1, events.toArray(new CalendarEvent[events.size()]));
         eventList.setAdapter(adapter);
+  
+    
+        while (cur2.moveToNext()) {
+            long calID = 0;
+            String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+            // Create a calendar object that will convert the date and time value in milliseconds to date.
+            Calendar calendar = Calendar.getInstance();
+
+
+
+            title = cur2.getString(4);
+            owner = cur2.getString(3);
+            calendar.setTimeInMillis(Long.parseLong(cur2.getString(1)));
+            strDate = formatter.format(calendar.getTime());
+            calendar.setTimeInMillis(Long.parseLong(cur2.getString(2)));
+            endDate = formatter.format(calendar.getTime());
+            eventaccess= cur2.getString(5);
+            calendarname=cur2.getString(6);
+            calendaraccess=cur2.getString(7);
+
+            ins.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
+
+           
+        };
+        adapter_ins = new EventAdapter(this, -1, ins.toArray(new CalendarEvent[ins.size()]));
+        insList.setAdapter(adapter_ins);
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
     }
 
+    
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
