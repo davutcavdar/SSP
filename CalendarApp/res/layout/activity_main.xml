@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.fourapps.calenderapp.MainActivity">
+    tools:context="co.fourapps.calenderapp.MainActivity"
+    android:orientation="vertical">
 
         <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Volume"
         android:id="@+id/VolumeTxt"/>
-    
+        
+          <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/NetInfo"
+         android:text="Net Info" />   
     
     <Spinner
         android:layout_width="match_parent"
@@ -18,20 +24,11 @@
         android:id="@+id/spinner"
 		android:layout_below="@+id/VolumeTxt" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_below="@+id/spinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    
      <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/insView"
-        android:layout_below="@+id/listView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+         android:id="@+id/insView"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"/>
+
+
      
-</RelativeLayout>
+</LinearLayout>

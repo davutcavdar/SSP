@@ -17,6 +17,8 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.net.Uri.Builder;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
@@ -44,6 +46,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private List<CalendarEvent> events;
     private List<CalendarEvent> ins;
 	public TextView datatext;
+	public TextView netinfo;
 	private int volume_level=0;
  
 
@@ -87,12 +90,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
         
         mailChooser = (Spinner) findViewById(R.id.spinner);
-        eventList = (ListView) findViewById(R.id.listView);
+      //  eventList = (ListView) findViewById(R.id.listView);
         insList = (ListView) findViewById(R.id.insView);
         datatext = (TextView) findViewById(R.id.VolumeTxt);
+        netinfo=(TextView) findViewById(R.id.NetInfo);
 
         events = new ArrayList<CalendarEvent>();
         ins=new ArrayList<CalendarEvent>();
+        
+   
  
         
 
@@ -140,7 +146,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         
         
         GetringerInfo();
+        GetNetworkInfo();
         makeQuery();
+        
         
 
     }
@@ -162,7 +170,61 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 			if (volume_level==1){
 				datatext.setText("Telefonun ses seviyesi: titresim");}
     	
+			
+			
+		
     }
+    
+    
+    
+    public void GetNetworkInfo(){
+    	
+    	
+    	 WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+         WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+    	
+         String strWifiInfo = "";
+         
+         int ipAddress = connectionInfo.getIpAddress();
+         
+         String ipString = String.format("%d.%d.%d.%d",
+                 (ipAddress & 0xff),
+                 (ipAddress >> 8 & 0xff),
+                 (ipAddress >> 16 & 0xff),
+                 (ipAddress >> 24 & 0xff));
+         
+String[] NetInfo = new String[7];
+         
+         NetInfo[0]=connectionInfo.getSSID() ;
+         NetInfo[1]=connectionInfo.getBSSID();
+         NetInfo[2]=ipString;
+         NetInfo[3]=connectionInfo.getMacAddress();
+         NetInfo[4]=Integer.toString(connectionInfo.getLinkSpeed());
+         NetInfo[5]=Integer.toString(connectionInfo.getRssi());
+         NetInfo[6]=Integer.toString(WifiManager.calculateSignalLevel(connectionInfo.getRssi(),5)); 
+         
+         
+         
+         
+         
+         strWifiInfo += 
+                 "SSID: " + NetInfo[0] + "\n" +
+                 "BSSID: " + NetInfo[1]  + "\n" +
+                 "IP Address: " + NetInfo[2]  + "\n" +
+                 "MAC Address: " + NetInfo[3]  + "\n" +
+                 "LinkSpeed: " + NetInfo[4]  + WifiInfo.LINK_SPEED_UNITS + "\n" +
+                 "Rssi: " + NetInfo[5]  + "dBm" + "\n" +
+                 "Rssi Level: " + NetInfo[6] ;
+
+        
+         
+         netinfo.setText(strWifiInfo);
+         
+         
+         
+    	
+    }
+    
     
     
     
