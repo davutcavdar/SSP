@@ -16,20 +16,36 @@
         android:text="New Text"
         android:id="@+id/organizer"/>
      
-    
-        <TextView
-         	android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/calendarname" />
-            
-            <TextView
-         	android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/calendaraccess" /> 
+
+     
        
 
+            <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="New Text"
+            android:id="@+id/calendarname"/>
+		
+        
+                <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="New Text"
+            android:id="@+id/calendaraccess"/>
+        
+        
+    </LinearLayout>        
+            
+            
+         
+            
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,6 +75,77 @@
     
         
     </LinearLayout>
+    
+    
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="New Text"
+            android:id="@+id/rrule"/>
+
+        
+    </LinearLayout>
+    
+   
+    
+    
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Desc"
+            android:id="@+id/desc"/>
+
+        
+    </LinearLayout>    
+
+           <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All Day?"
+            android:id="@+id/allday"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Att Data"
+            android:id="@+id/attdata" />
+        
+
+        
+    
+        
+    </LinearLayout>
+     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 </LinearLayout>

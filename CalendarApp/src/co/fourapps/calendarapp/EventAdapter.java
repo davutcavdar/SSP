@@ -34,22 +34,34 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
         UiElements.eventaccess= (TextView) rowView.findViewById(R.id.eventaccess);
         UiElements.calendarname= (TextView) rowView.findViewById(R.id.calendarname);
         UiElements.calendaraccess= (TextView) rowView.findViewById(R.id.calendaraccess);
-      
+        UiElements.rrule=(TextView) rowView.findViewById(R.id.rrule);
+        UiElements.desc=(TextView) rowView.findViewById(R.id.desc);
+        UiElements.allday=(TextView) rowView.findViewById(R.id.allday);
+        UiElements.attdata=(TextView) rowView.findViewById(R.id.attdata);
         
-
+        
+        
+        
+        
         UiElements.title.setText("Event Title: " + values[position].getEventName());
         UiElements.organizer.setText("Event Owner: "+values[position].getOrganizerName());
         UiElements.start.setText(values[position].getStartDate());
         UiElements.end.setText(values[position].getEndDate());
         UiElements.eventaccess.setText("Event Privacy: "+values[position].getAccess());
         UiElements.calendarname.setText("Calendar: "+values[position].getCalendarName());
-        UiElements.calendaraccess.setText("Calendar Privacy: "+values[position].getCalendarAccess());
-       
+        UiElements.calendaraccess.setText("Calendar Privacy: "+ values[position].getCalendarAccess());
+        UiElements.rrule.setText("Recurrency: "+ values[position].getRrule());
+        UiElements.desc.setText("Description: "+ values[position].getDesc());
+        UiElements.allday.setText("Allday?: "+ values[position].getAllday());
+        UiElements.attdata.setText("Attendee Data: "+ values[position].getAttdata());
+        
+        
+        
         return rowView;
     }
 
     static final class UiElements {
   
-		public static TextView title,organizer,start,end,eventaccess,calendarname,calendaraccess,volumelevel;
+		public static TextView title,organizer,start,end,eventaccess,calendarname,calendaraccess,volumelevel,rrule,desc,allday,attdata;
     }
 }

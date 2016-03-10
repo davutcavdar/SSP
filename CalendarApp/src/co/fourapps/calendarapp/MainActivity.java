@@ -1,17 +1,25 @@
 package co.fourapps.calendarapp;
 
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
-
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.net.Uri.Builder;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.provider.CalendarContract.Instances;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,12 +28,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 
 
@@ -48,6 +50,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     public static final String[] EVENT_PROJECTION = new String[]{
             CalendarContract.Events._ID,                           // 0
             CalendarContract.Events.DTSTART,                  // 1
+            
             CalendarContract.Events.DTEND,         // 2
             CalendarContract.Events.OWNER_ACCOUNT,                  // 3        
             CalendarContract.Events.TITLE, // 4
@@ -60,14 +63,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     
     public static final String[] EVENT_PROJECTION_INS = new String[]{
             CalendarContract.Events._ID,                           // 0
-            CalendarContract.Events.DTSTART,                  // 1
-            CalendarContract.Events.DTEND,         // 2
+            CalendarContract.Instances.BEGIN,                  // 1
+            CalendarContract.Instances.END,         // 2
             CalendarContract.Events.OWNER_ACCOUNT,                  // 3        
             CalendarContract.Events.TITLE, // 4
             CalendarContract.Events.ACCESS_LEVEL, //5
             CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,//6
-            CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, //7
-            CalendarContract.Instances.BEGIN //8
+            CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL,//7
+            CalendarContract.Events.RRULE,//8
+            CalendarContract.Events.DESCRIPTION, //9
+            CalendarContract.Events.ALL_DAY,//10
+            CalendarContract.Events.HAS_ATTENDEE_DATA //11
+            
+         
             
     };
 
@@ -84,21 +92,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         datatext = (TextView) findViewById(R.id.VolumeTxt);
 
         events = new ArrayList<CalendarEvent>();
+        ins=new ArrayList<CalendarEvent>();
+ 
+        
 
-
-		AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE); 
-		volume_level= am.getRingerMode();
-		
-		
-		if (volume_level==0)
-		{
-			datatext.setText("Telefonun ses seviyesi: sessiz"); }
-			
-			if (volume_level==2){
-				datatext.setText("Telefonun ses seviyesi: sesli");}
-				
-			if (volume_level==1){
-				datatext.setText("Telefonun ses seviyesi: titresim");}
 		
 		
 	
@@ -140,10 +137,37 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             if (acc.name.equals(selectedTitle))
                 selectedAccount = acc;
         }
+        
+        
+        GetringerInfo();
         makeQuery();
+        
 
     }
 
+    
+    public void GetringerInfo() {
+    	
+		AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE); 
+		volume_level= am.getRingerMode();
+		
+		
+		if (volume_level==0)
+		{
+			datatext.setText("Telefonun ses seviyesi: sessiz"); }
+			
+			if (volume_level==2){
+				datatext.setText("Telefonun ses seviyesi: sesli");}
+				
+			if (volume_level==1){
+				datatext.setText("Telefonun ses seviyesi: titresim");}
+    	
+    }
+    
+    
+    
+    
+    
     @SuppressWarnings("deprecation")
 	public void makeQuery() {
         Date sDate = new Date();
@@ -190,11 +214,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         ContentResolver cr2 = getContentResolver(); //for instances
         
         Uri uri = CalendarContract.Events.CONTENT_URI;
-        Uri uri2 = CalendarContract.Instances.CONTENT_URI; // for instances
+        Builder uri2 = Uri.parse("content://com.android.calendar/instances/when").buildUpon(); // for instances
+        
+        ContentUris.appendId(uri2, Long.MIN_VALUE);
+        ContentUris.appendId(uri2, Long.MAX_VALUE); 
+        
         
         String selection = "((" + CalendarContract.Events.ACCOUNT_NAME + " = ?) AND ("
                 + CalendarContract.Events.DTSTART + " >= ?) AND ("+ CalendarContract.Events.DTEND + " <= ?))";
      
+        String selection2 = "((" + CalendarContract.Events.ACCOUNT_NAME + " = ?) AND ("
+                + CalendarContract.Instances.BEGIN + " >= ?) AND ("+ CalendarContract.Instances.END + " <= ?))";
         
         String[] selectionArgs = new String[]{selectedAccount.name, sDate.getTime() + "", eDate.getTime() + "" };
 
@@ -204,43 +234,44 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         
         // Submit the query and get a Cursor object back.
        
-        
+
         cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
-        cur2 = cr2.query(uri2, EVENT_PROJECTION_INS, selection, selectionArgs, null);
+        cur2 = cr2.query(uri2.build(), EVENT_PROJECTION_INS, selection2, selectionArgs, null);
 
         
-        while (cur.moveToNext()) {
-            long calID = 0;
-            String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-            // Create a calendar object that will convert the date and time value in milliseconds to date.
-            Calendar calendar = Calendar.getInstance();
-
-
-
-            title = cur.getString(4);
-            owner = cur.getString(3);
-            calendar.setTimeInMillis(Long.parseLong(cur.getString(1)));
-            strDate = formatter.format(calendar.getTime());
-            calendar.setTimeInMillis(Long.parseLong(cur.getString(2)));
-            endDate = formatter.format(calendar.getTime());
-            eventaccess= cur.getString(5);
-            calendarname=cur.getString(6);
-            calendaraccess=cur.getString(7);
-
-            events.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
-
-           
-        };
-        adapter = new EventAdapter(this, -1, events.toArray(new CalendarEvent[events.size()]));
-        eventList.setAdapter(adapter);
+//        while (cur.moveToNext()) {
+//            long calID = 0;
+//            String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
+//
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//
+//            // Create a calendar object that will convert the date and time value in milliseconds to date.
+//            Calendar calendar = Calendar.getInstance();
+//
+//
+//
+//            title = cur.getString(4);
+//            owner = cur.getString(3);
+//            calendar.setTimeInMillis(Long.parseLong(cur.getString(1)));
+//            strDate = formatter.format(calendar.getTime());
+//            calendar.setTimeInMillis(Long.parseLong(cur.getString(2)));
+//            endDate = formatter.format(calendar.getTime());
+//            eventaccess= cur.getString(5);
+//            calendarname=cur.getString(6);
+//            calendaraccess=cur.getString(7);
+//
+//            events.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
+//
+//           
+//        };
+//        adapter = new EventAdapter(this, -1, events.toArray(new CalendarEvent[events.size()]));
+//        eventList.setAdapter(adapter);
   
     
         while (cur2.moveToNext()) {
             long calID = 0;
             String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
+            String rrule,desc,allday,attdata;
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -258,8 +289,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             eventaccess= cur2.getString(5);
             calendarname=cur2.getString(6);
             calendaraccess=cur2.getString(7);
-
-            ins.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
+            rrule=cur2.getString(8);
+            desc=cur2.getString(9);
+            allday=cur2.getString(10);
+            attdata=cur2.getString(11);
+            
+            
+            
+            
+            ins.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess,rrule,desc,allday,attdata));
 
            
         };
