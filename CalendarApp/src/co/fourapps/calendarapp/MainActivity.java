@@ -300,34 +300,7 @@ String[] NetInfo = new String[7];
         cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
         cur2 = cr2.query(uri2.build(), EVENT_PROJECTION_INS, selection2, selectionArgs, null);
 
-        
-//        while (cur.moveToNext()) {
-//            long calID = 0;
-//            String title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess;
-//
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//
-//            // Create a calendar object that will convert the date and time value in milliseconds to date.
-//            Calendar calendar = Calendar.getInstance();
-//
-//
-//
-//            title = cur.getString(4);
-//            owner = cur.getString(3);
-//            calendar.setTimeInMillis(Long.parseLong(cur.getString(1)));
-//            strDate = formatter.format(calendar.getTime());
-//            calendar.setTimeInMillis(Long.parseLong(cur.getString(2)));
-//            endDate = formatter.format(calendar.getTime());
-//            eventaccess= cur.getString(5);
-//            calendarname=cur.getString(6);
-//            calendaraccess=cur.getString(7);
-//
-//            events.add(new CalendarEvent(title,owner,strDate,endDate,eventaccess,calendarname,calendaraccess));
-//
-//           
-//        };
-//        adapter = new EventAdapter(this, -1, events.toArray(new CalendarEvent[events.size()]));
-//        eventList.setAdapter(adapter);
+
   
     
         while (cur2.moveToNext()) {
@@ -365,23 +338,7 @@ String[] NetInfo = new String[7];
         };
         adapter_ins = new EventAdapter(this, -1, ins.toArray(new CalendarEvent[ins.size()]));
         insList.setAdapter(adapter_ins);
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    
-    
-    
-    
+
     
     }
 
