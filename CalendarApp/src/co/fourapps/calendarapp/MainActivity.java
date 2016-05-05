@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -24,8 +25,10 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -81,6 +84,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
          
             
     };
+    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +104,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         ins=new ArrayList<CalendarEvent>();
         
    
- 
-        
 
-		
 		
 	
         
@@ -340,8 +342,15 @@ String[] NetInfo = new String[7];
         insList.setAdapter(adapter_ins);
 
     
+        
+        
+        
+        
     }
 
+    
+
+    
     
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
