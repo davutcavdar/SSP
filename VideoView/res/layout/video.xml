@@ -20,15 +20,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="10dp"
-        android:layout_y="315dp"
-        android:text="Kısa Video" />
+        android:layout_y="314dp"
+        android:text="Egzersiz (5 dk.)" />
 
     <Button
         android:id="@+id/BtnUzun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="128dp"
-        android:layout_y="315dp"
-        android:text="Uzun Video" />
+        android:layout_x="162dp"
+        android:layout_y="314dp"
+        android:text="Egzersiz (10 dk.)" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="1dp"
+        android:layout_y="372dp"
+        android:text="Bu egzersizlerin amacı uzun süre oturmanın yan etkileri olan bel, boyun, göz, bilek ve omuz kaslarındaki ağrıları hafifletmek,metabolizmayı hızlandırıp kan akışını artırmak, eklem bağlarını gevşetip daha sağlıklı molalar vermeye yardımcı olmak ve stresi azaltıp daha verimli çalışmayı desteklemektir."
+        android:textSize="12sp" />
 
 </AbsoluteLayout>
